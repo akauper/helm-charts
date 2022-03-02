@@ -1,0 +1,17 @@
+apiVersion: v1
+entries:
+  unity-accelerator:
+  - apiVersion: v2
+    appVersion: 1.0.946
+    created: "2022-03-01T16:56:55.699356-08:00"
+    description: Unity Accelerator Helm Chart for Kubernetes
+    digest: 8dea7209b9aad2bd35499aab31de1148a568b2fb0c8e8e9ac7bed559123429d0
+    home: https://github.com/akauper/unity-accelerator-helm
+    maintainers:
+    - name: Adam Kauper
+    name: unity-accelerator
+    type: application
+    urls:
+    - https://github.com/akauper/helm-charts/charts/unity-accelerator/unity-accelerator-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-03-01T16:56:55.6975976-08:00"

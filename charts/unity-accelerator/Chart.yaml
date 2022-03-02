@@ -1,7 +1,7 @@
 apiVersion: v2
 name: unity-accelerator
 description: Unity Accelerator Helm Chart for Kubernetes
-home: https://github.com/akauper/unity-accelerator-helm
+home: https://github.com/akauper/helm-charts/charts/unity-accelerator
 maintainers:
   - name: Adam Kauper
 
