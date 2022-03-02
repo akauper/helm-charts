@@ -1,0 +1,88 @@
+{{- if .Values.useDeploy -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "unity-accelerator.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "unity-accelerator.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "unity-accelerator.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "unity-accelerator.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "unity-accelerator.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            COLLAB_REGISTRATION_TOKEN: "{{ .Values.unityAccelerator.collab_registration_token }}"
+            DISABLE_USAGE_STATS: "{{ .Values.unityAccelerator.disable_usage_stats }}"
+            USER: "{{ .Values.unityAccelerator.user }}"
+            PASSWORD: "{{ .Values.unityAccelerator.password }}"
+            UNITY_ACCELERATOR_LOG_STDOUT: "{{ .Values.unityAccelerator.log_stdout }}"
+          ports:
+            - name: unity
+              containerPort: 10080
+              protocol: TCP
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: https
+              containerPort: 443
+              protocol: TCP
+          {{ if .Values.volume.enabled -}}
+          volumeMounts:
+            - mountPath: /agent
+              name: storage
+          {{ end }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 10080
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{ if .Values.volume.enabled -}}
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: {{ include "unity-accelerator.fullname" . }}-pvc
+      {{- end -}}
+{{- end -}}

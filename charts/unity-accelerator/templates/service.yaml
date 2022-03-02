@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "unity-accelerator.fullname" . }}
+  labels:
+    {{- include "unity-accelerator.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 10080
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "unity-accelerator.selectorLabels" . | nindent 4 }}
