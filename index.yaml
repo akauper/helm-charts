@@ -12,6 +12,6 @@ entries:
     name: unity-accelerator
     type: application
     urls:
-    - https://github.com/akauper/helm-charts/unity-accelerator-0.1.0.tgz
+    - https://akauper.github.io/helm-charts/unity-accelerator-0.1.0.tgz
     version: 0.1.0
 generated: "2022-03-06T23:19:55.8959501-08:00"
