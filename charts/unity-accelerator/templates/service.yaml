@@ -4,8 +4,8 @@ metadata:
   name: {{ include "unity-accelerator.fullname" . }}
   labels:
     {{- include "unity-accelerator.labels" . | nindent 4 }}
-  annotations:
-    {{- include "unity-accelerator.service.annotations" . | nindent 4 }}
+  # annotations:
+    # {{- include "unity-accelerator.service.annotations" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
