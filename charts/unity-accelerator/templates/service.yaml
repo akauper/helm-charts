@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "unity-accelerator.labels" . | nindent 4 }}
   annotations:
-    {{- toYaml . | nindent 4 }}
+    {{- include "unity-accelerator.service.annotations" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
