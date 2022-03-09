@@ -19,5 +19,13 @@ spec:
       targetPort: 10080
       protocol: TCP
       name: accelerator
+    - port: 10443
+      targetPort: 10443
+      protocol: TCP
+      name: accelerator-https
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http2
   selector:
     {{- include "unity-accelerator.selectorLabels" . | nindent 4 }}

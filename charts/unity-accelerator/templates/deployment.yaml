@@ -50,11 +50,17 @@ spec:
             - name: accelerator
               containerPort: 10080
               protocol: TCP
+            - name: accelerator-https
+              containerPort: 10443
+              protocol: TCP
             - name: http
               containerPort: 80
               protocol: TCP
             - name: https
               containerPort: 443
+              protocol: TCP
+            - name: http2
+              containerPort: 8080
               protocol: TCP
           {{ if .Values.volume.enabled -}}
           volumeMounts:
@@ -68,7 +74,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: 10080
+              # port: 10080
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
