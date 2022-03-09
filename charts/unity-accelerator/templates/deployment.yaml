@@ -55,15 +55,6 @@ spec:
             - name: accel-https
               containerPort: 10443
               protocol: TCP
-            - name: http
-              containerPort: 80
-              protocol: TCP
-            - name: https
-              containerPort: 443
-              protocol: TCP
-            - name: http2
-              containerPort: 8080
-              protocol: TCP
           {{ if .Values.volume.enabled -}}
           volumeMounts:
             - mountPath: /agent

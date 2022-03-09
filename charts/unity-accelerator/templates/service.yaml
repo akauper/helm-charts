@@ -7,14 +7,6 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: 80
-      targetPort: 80
-      protocol: TCP
-      name: http
-    - port: 443
-      targetPort: 443
-      protocol: TCP
-      name: https
     - port: {{ .Values.service.port }}
       targetPort: 10080
       protocol: TCP
@@ -23,9 +15,5 @@ spec:
       targetPort: 10443
       protocol: TCP
       name: accel-https
-    - port: 8080
-      targetPort: 8080
-      protocol: TCP
-      name: http2
   selector:
     {{- include "unity-accelerator.selectorLabels" . | nindent 4 }}
