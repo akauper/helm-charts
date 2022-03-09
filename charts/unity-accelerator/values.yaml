@@ -16,9 +16,6 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-# If this option is set to false a StateFulset instead of a Deployment is used
-useDeploy: true
-
 unityAccelerator:
   # Token for https://unity.com/products/unity-teams
   collab_registration_token: ""
@@ -48,13 +45,13 @@ podLabels:
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
 
 service:
   type: ClusterIP

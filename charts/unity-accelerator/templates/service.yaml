@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "unity-accelerator.fullname" . }}
+  name: unity-accelerator
   labels:
     {{- include "unity-accelerator.labels" . | nindent 4 }}
 spec:

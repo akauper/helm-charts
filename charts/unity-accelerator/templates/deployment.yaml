@@ -1,4 +1,4 @@
-{{- if .Values.useDeploy -}}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,23 +27,23 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "unity-accelerator.serviceAccountName" . }}
-      # securityContext:
-      #   {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          # securityContext:
-            # {{- toYaml .Values.securityContext | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: COLLAB_REGISTRATION_TOKEN
-              value: "{{ .Values.unityAccelerator.collab_registration_token }}",
+              value: "{{ .Values.unityAccelerator.collab_registration_token }}"
             - name: DISABLE_USAGE_STATS
-              value: "{{ .Values.unityAccelerator.disable_usage_stats }}",
+              value: "{{ .Values.unityAccelerator.disable_usage_stats }}"
             - name: USER
-              value: "{{ .Values.unityAccelerator.user }}",
+              value: "{{ .Values.unityAccelerator.user }}"
             - name: PASSWORD
-              value: "{{ .Values.unityAccelerator.password }}",
+              value: "{{ .Values.unityAccelerator.password }}"
             - name: UNITY_ACCELERATOR_LOG_STDOUT
               value: "{{ .Values.unityAccelerator.log_stdout }}"
           ports:
@@ -90,4 +90,3 @@ spec:
         persistentVolumeClaim:
           claimName: {{ include "unity-accelerator.fullname" . }}-pvc
       {{- end -}}
-{{- end -}}
