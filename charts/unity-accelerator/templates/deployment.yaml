@@ -35,12 +35,13 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            COLLAB_REGISTRATION_TOKEN: "{{ .Values.unityAccelerator.collab_registration_token }}"
-            DISABLE_USAGE_STATS: "{{ .Values.unityAccelerator.disable_usage_stats }}"
-            USER: "{{ .Values.unityAccelerator.user }}"
-            PASSWORD: "{{ .Values.unityAccelerator.password }}"
+          env: [
+            COLLAB_REGISTRATION_TOKEN: "{{ .Values.unityAccelerator.collab_registration_token }}",
+            DISABLE_USAGE_STATS: "{{ .Values.unityAccelerator.disable_usage_stats }}",
+            USER: "{{ .Values.unityAccelerator.user }}",
+            PASSWORD: "{{ .Values.unityAccelerator.password }}",
             UNITY_ACCELERATOR_LOG_STDOUT: "{{ .Values.unityAccelerator.log_stdout }}"
+          ]
           ports:
             - name: unity
               containerPort: 10080
