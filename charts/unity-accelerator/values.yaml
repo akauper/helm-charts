@@ -41,14 +41,13 @@ podAnnotations: {}
 podLabels:
   app: unity-accelerator
 
-podSecurityContext:
-  fsGroup: 1000
+podSecurityContext: {}
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: no
   # runAsNonRoot: true
   # runAsUser: 1000
 
