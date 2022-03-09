@@ -47,7 +47,7 @@ spec:
             - name: UNITY_ACCELERATOR_LOG_STDOUT
               value: "{{ .Values.unityAccelerator.log_stdout }}"
           ports:
-            - name: unity
+            - name: accelerator
               containerPort: 10080
               protocol: TCP
             - name: http

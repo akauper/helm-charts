@@ -39,11 +39,10 @@ serviceAccount:
 
 podAnnotations: {}
 podLabels:
-  {}
-  # app: unity-accelerator
+  app: unity-accelerator
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  fsGroup: 1000
 
 securityContext: {}
   # capabilities:
