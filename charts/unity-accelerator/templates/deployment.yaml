@@ -46,6 +46,8 @@ spec:
               value: "{{ .Values.unityAccelerator.password }}"
             - name: UNITY_ACCELERATOR_LOG_STDOUT
               value: "{{ .Values.unityAccelerator.log_stdout }}"
+            - name: UNITY_ACCELERATOR_PERSIST
+              value: /agent
           ports:
             - name: accel
               containerPort: 10080
