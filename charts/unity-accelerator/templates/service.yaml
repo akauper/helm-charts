@@ -18,11 +18,11 @@ spec:
     - port: {{ .Values.service.port }}
       targetPort: 10080
       protocol: TCP
-      name: accelerator
+      name: accel
     - port: 10443
       targetPort: 10443
       protocol: TCP
-      name: accelerator-https
+      name: accel-https
     - port: 8080
       targetPort: 8080
       protocol: TCP
